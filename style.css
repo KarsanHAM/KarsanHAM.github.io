@@ -1,0 +1,20 @@
+/* General additions to all pages to creat an overal similar experience*/
+h1 {
+    text-align: center;
+  }
+
+  .Image {
+    text-align: center;
+  }
+/*additions to particular pages*/
+  #col {
+    border: 1px solid;
+    border-radius: 25px;
+  }
+
+  .allcols {
+    border: 1px solid;
+    border-radius: 25px;
+    background-color: #fffafa;
+  }
+  
