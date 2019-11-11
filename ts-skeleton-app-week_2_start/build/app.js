@@ -50,9 +50,26 @@ class Game {
     levelScreen() {
         const lives = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
         this.loadImage(lives, this.writeLivesImageToStartScreen);
+        this.ctx.fillStyle = "white";
+        this.ctx.font = '25px Minecraft';
+        this.ctx.fillText(`Your score: ${this.score}`, 1625, 65);
+        const asteroid_image = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png";
+        this.loadImage(asteroid_image, this.writeAsteroidImagesToStartScreen);
+        const playership_image = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
+        this.loadImage(playership_image, this.writePlayerShipImageToStartScreen);
+    }
+    writeAsteroidImagesToStartScreen(img) {
+        for (let i = 0; i <= 5; i++) {
+            this.ctx.drawImage(img, Math.floor(Math.random() * 1700), Math.floor(Math.random() * 1000));
+        }
     }
     writeLivesImageToStartScreen(img) {
-        this.ctx.drawImage(img, 25, 25);
+        this.ctx.drawImage(img, 25, 25, 50, 50);
+        this.ctx.drawImage(img, 75, 25, 50, 50);
+        this.ctx.drawImage(img, 125, 25, 50, 50);
+    }
+    writePlayerShipImageToStartScreen(img) {
+        this.ctx.drawImage(img, 850, 400);
     }
     titleScreen() {
     }
