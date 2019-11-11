@@ -24,6 +24,34 @@ class Ship {
 }
 const xWing = new Ship('xWing', 'red', 50);
 console.log(xWing);
+class Asteroid {
+    constructor(radius, color, speed, direction) {
+        this.radius = radius;
+        this.color = color;
+        this.speed = speed;
+        this.direction = direction;
+    }
+    setRadius(amount) {
+        this.radius = amount;
+    }
+    getRadius() {
+        return this.radius;
+    }
+    setSpeed(amount) {
+        this.speed = amount;
+    }
+    getSpeed() {
+        return this.speed;
+    }
+    setDirection(direction) {
+        this.direction = direction;
+    }
+    getDirection() {
+        return this.direction;
+    }
+}
+const shipDestroyer = new Asteroid(500, 'brown', 5, 'left');
+console.log(shipDestroyer);
 class Animal {
     constructor(name, legs, sound) {
         this.name = name;

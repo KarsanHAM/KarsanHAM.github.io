@@ -11,7 +11,6 @@ class Ship{
         this.distanceTravelled;
     }
     
-
     public getCannons() : number{
         return this.cannons
     }
@@ -26,7 +25,7 @@ class Ship{
 
     public setDistanceTravelled (amount:number) {
         this.distanceTravelled = amount;
-    }
+    } 
 
     public shoot(){}
 
@@ -37,6 +36,46 @@ class Ship{
 const xWing : Ship = new Ship('xWing', 'red', 50);
 console.log(xWing)
 
+class Asteroid{
+    private radius: number;
+    private color: string;
+    private speed: number;
+    private direction: string;
+
+    public constructor (radius: number, color: string, speed: number, direction: string) {
+        this.radius = radius;
+        this.color = color;
+        this.speed = speed;
+        this.direction = direction;
+    }
+
+    public setRadius(amount:number) {
+        this.radius = amount;
+    }
+
+    public getRadius() : number {
+        return this.radius
+    }
+
+    public setSpeed(amount:number) {
+        this.speed = amount;
+    }
+
+    public getSpeed() : number {
+        return this.speed
+    }
+
+    public setDirection(direction:string) {
+        this.direction = direction;
+    }
+
+    public getDirection() : string {
+        return this.direction
+    }
+}
+
+const shipDestroyer : Asteroid = new Asteroid(500, 'brown', 5, 'left');
+console.log(shipDestroyer)
 
 // xWing.move();
 // console.log(xWing.getDistanceTravelled())
