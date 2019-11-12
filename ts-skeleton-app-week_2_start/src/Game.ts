@@ -41,7 +41,6 @@ class Game {
         // this.startScreen();
         this.levelScreen();
         // this.titleScreen();
-
     }
 
     //-------- Splash screen methods ------------------------------------
@@ -50,15 +49,9 @@ class Game {
      */
     public startScreen() {
         //1. add 'Asteroids' text
-        this.ctx.fillStyle = "white";
-        this.ctx.textAlign = "center";
-        this.ctx.font = '75px Minecraft';
-        this.ctx.fillText("Asteroids", 750, 100);
+        this.writeTextToCanvas(`Asteroids`, 75, 750 , 100, "center", "white" );
         //2. add 'Press to play' text
-        this.ctx.fillStyle = "white";
-        this.ctx.textAlign = "center";
-        this.ctx.font = '30px Minecraft';
-        this.ctx.fillText("Press play to play", 750, 150);
+        this.writeTextToCanvas(`Press to play`, 30, 750 , 150, "center", "white" );
         //3. add button with 'start' text
         const start_button = "./assets/images/SpaceShooterRedux/PNG/UI/buttonBlue.png";
         this.loadImage(start_button, this.writeStartButtonImageToStartScreen)
@@ -73,11 +66,22 @@ class Game {
 
     private writeStartButtonImageToStartScreen(img: HTMLImageElement) {
         this.ctx.drawImage(img, 637, 500);
-        this.ctx.fillStyle = "black";
-        this.ctx.textAlign = "center";
-        this.ctx.font = '20px Minecraft';
-        this.ctx.fillText("Play", 750, 525);
+        this.writeTextToCanvas(`Play`, 20, 750 , 525, "center", "black" );
     }
+
+    public writeTextToCanvas(
+        text: string,
+        fontSize: number = 20,
+        xCoordinate: number,
+        yCoordinate: number,
+        alignment: CanvasTextAlign = "center",
+        color: string = "white",
+    ) {
+        this.ctx.font = `${fontSize}px Minecraft`;
+        this.ctx.fillStyle = color;
+        this.ctx.textAlign = alignment;
+        this.ctx.fillText(text, xCoordinate, yCoordinate);
+    };
 
 
     //-------- level screen methods -------------------------------------
@@ -89,19 +93,23 @@ class Game {
         const lives = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
         this.loadImage(lives, this.writeLivesImageToStartScreen)
         //2. draw current score
-        this.ctx.fillStyle = "white";
-        this.ctx.font = '25px Minecraft';
-        this.ctx.fillText(`Your score: ${this.score}`, 1625, 65);
+        this.writeTextToCanvas(`Your score: ${this.score}`, 20, 1400 , 50, "center", "white" );
         //3. draw random asteroids
-        const asteroid_image = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png";
-        this.loadImage(asteroid_image, this.writeAsteroidImagesToStartScreen);
+        const asteroid_image1 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png";
+        this.loadImage(asteroid_image1, this.writeAsteroidImagesToStartScreen);
+        const asteroid_image2 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png";
+        this.loadImage(asteroid_image2, this.writeAsteroidImagesToStartScreen);
+        const asteroid_image3 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorBrown_small1.png";
+        this.loadImage(asteroid_image3, this.writeAsteroidImagesToStartScreen);
+        const asteroid_image4 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png";
+        this.loadImage(asteroid_image4, this.writeAsteroidImagesToStartScreen);
         //4. draw player spaceship
         const playership_image = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
         this.loadImage(playership_image, this.writePlayerShipImageToStartScreen);
     }
 
     private writeAsteroidImagesToStartScreen(img: HTMLImageElement) {
-        for (let i = 0; i <= 5;i++) {
+        for (let i = 0; i <= 3;i++) { 
             this.ctx.drawImage(img, Math.floor(Math.random() * 1700), Math.floor(Math.random() * 1000));
         }
     }
@@ -179,6 +187,7 @@ class Game {
 let init = function () {
     const Asteroids = new Game(<HTMLCanvasElement>document.getElementById('canvas'));
 };
+
 
 // Add EventListener to load the game whenever de browser is ready
 window.addEventListener('load', init);
