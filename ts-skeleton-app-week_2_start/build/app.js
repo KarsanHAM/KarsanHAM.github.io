@@ -66,6 +66,11 @@ class Game {
         }
     }
     writeLivesImageToStartScreen(img) {
+        let drawLiveHere = 25;
+        for (let i = 0; i <= this.lives - 1; i++) {
+            this.ctx.drawImage(img, drawLiveHere, 25, 50, 50);
+            drawLiveHere += 50;
+        }
         this.ctx.drawImage(img, 25, 25, 50, 50);
         this.ctx.drawImage(img, 75, 25, 50, 50);
         this.ctx.drawImage(img, 125, 25, 50, 50);
@@ -74,6 +79,13 @@ class Game {
         this.ctx.drawImage(img, 850, 400);
     }
     titleScreen() {
+        this.writeTextToCanvas(`Your score: ${this.score}`, 100, 950, 300, "center", "white");
+        this.writeTextToCanvas(`Highscores`, 70, 950, 450, "center", "white");
+        let PrintHighscoreHere = 550;
+        for (let i = 0; i <= this.highscores.length; i++) {
+            this.writeTextToCanvas(`${i + 1}: ${this.highscores[i].playerName} - ${this.highscores[i].score}`, 30, 950, PrintHighscoreHere, "center", "white");
+            PrintHighscoreHere = PrintHighscoreHere + 50;
+        }
     }
     loadImage(source, callback) {
         let imageElement = new Image();
