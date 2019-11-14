@@ -38,6 +38,7 @@ class Game {
         ]
 
         // All screens: uncomment to activate
+        this.loop();
         // this.startScreen();
         this.levelScreen();
         // this.titleScreen();
@@ -106,6 +107,23 @@ class Game {
         //4. draw player spaceship
         const playership_image = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
         this.loadImage(playership_image, this.writePlayerShipImageToStartScreen);
+        //5. animate random asteroids.
+    }
+    //method game loop
+    private counter:number = 0;
+    public loop = () => {
+        const asteroid_image4 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png";
+        this.loadImage(asteroid_image4, this.drawMovingImageToLevelScreen);
+        console.log(this.counter++)
+        requestAnimationFrame(this.loop)
+    }
+
+    private x = this.randomNumber(0,700)
+    private y = 350
+
+    public drawMovingImageToLevelScreen(img: HTMLImageElement) {
+        this.ctx.clearRect(0, 0, this.canvas.width , this.canvas.height );
+        this.ctx.drawImage(img, this.x++, this.y);
     }
 
     private writeAsteroidImagesToStartScreen(img: HTMLImageElement) {
@@ -119,9 +137,6 @@ class Game {
             this.ctx.drawImage(img, drawLiveHere, 25, 50, 50);
             drawLiveHere += 50;
         }
-        this.ctx.drawImage(img, 25, 25, 50, 50);
-        this.ctx.drawImage(img, 75, 25, 50, 50);
-        this.ctx.drawImage(img, 125, 25, 50, 50);
     }
 
     private writePlayerShipImageToStartScreen(img: HTMLImageElement) {

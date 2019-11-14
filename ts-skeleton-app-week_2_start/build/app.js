@@ -1,5 +1,14 @@
 class Game {
     constructor(canvasId) {
+        this.counter = 0;
+        this.loop = () => {
+            const asteroid_image4 = "./assets/images/SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png";
+            this.loadImage(asteroid_image4, this.drawMovingImageToLevelScreen);
+            console.log(this.counter++);
+            requestAnimationFrame(this.loop);
+        };
+        this.x = this.randomNumber(0, 700);
+        this.y = 350;
         this.canvas = canvasId;
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -21,6 +30,7 @@ class Game {
                 score: 200
             }
         ];
+        this.loop();
         this.levelScreen();
     }
     startScreen() {
@@ -60,6 +70,10 @@ class Game {
         const playership_image = "./assets/images/SpaceShooterRedux/PNG/playerShip1_blue.png";
         this.loadImage(playership_image, this.writePlayerShipImageToStartScreen);
     }
+    drawMovingImageToLevelScreen(img) {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.drawImage(img, this.x++, this.y);
+    }
     writeAsteroidImagesToStartScreen(img) {
         for (let i = 0; i <= 3; i++) {
             this.ctx.drawImage(img, Math.floor(Math.random() * 1700), Math.floor(Math.random() * 1000));
@@ -71,9 +85,6 @@ class Game {
             this.ctx.drawImage(img, drawLiveHere, 25, 50, 50);
             drawLiveHere += 50;
         }
-        this.ctx.drawImage(img, 25, 25, 50, 50);
-        this.ctx.drawImage(img, 75, 25, 50, 50);
-        this.ctx.drawImage(img, 125, 25, 50, 50);
     }
     writePlayerShipImageToStartScreen(img) {
         this.ctx.drawImage(img, 850, 400);
